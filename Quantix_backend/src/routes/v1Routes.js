@@ -2,6 +2,7 @@ let express = require('express')
 let router = express.Router()
 let userController = require('../controllers/userController')
 let planController = require('../controllers/planController')
+let aiController = require('../controllers/aiController')
 let authentication = require("../middlewares/authMiddleware")
 let {
     validateRegister,
@@ -28,10 +29,12 @@ router.post('/socialLogin', validateSocialLogin, userController.socialLogin)
 
 
 //**************** PLANS
-router.post('/addPlans', authentication,validateAddPlans, planController.addPlans)
-router.delete('/deletePlan',authentication,validateDeletePlan,planController.deletePlan)
-router.get('/getAllPlans',authentication,planController.getAllPlans)
+router.post('/addPlans', authentication, validateAddPlans, planController.addPlans)
+router.delete('/deletePlan', authentication, validateDeletePlan, planController.deletePlan)
+router.get('/getAllPlans', authentication, planController.getAllPlans)
 
 
+//**************** AI 
+router.post("/getDimensions", authentication,aiController.getDimensions)
 
 module.exports = router

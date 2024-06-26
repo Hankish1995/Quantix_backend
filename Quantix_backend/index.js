@@ -4,7 +4,7 @@ let connectDB = require('./src/config/dbConfig')
 let v1Route = require('./src/routes/v1Routes')
 let cors = require('cors')
 let fileUpload= require('express-fileupload')
-let bodyParser =  require('body-parser')
+
 
 
 app.use(cors())
