@@ -5,7 +5,8 @@ let planSchema = new mongoose.Schema({
     planName: { type: String, default: null },
     planAddress: { type: String, default: null },
     imageUrl: { type: String, default: null },
-    status: { type: Boolean, default: false }
+    status: { type: Boolean, default: false },
+    outputGenerated:{type: mongoose.Schema.Types.Mixed,default:null}
 
 }, { timestamps: true })
 

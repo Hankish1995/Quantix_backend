@@ -2,7 +2,6 @@ let express = require('express')
 let router = express.Router()
 let userController = require('../controllers/userController')
 let planController = require('../controllers/planController')
-let aiController = require('../controllers/aiController')
 let authentication = require("../middlewares/authMiddleware")
 let {
     validateRegister,
@@ -34,7 +33,6 @@ router.delete('/deletePlan', authentication, validateDeletePlan, planController.
 router.get('/getAllPlans', authentication, planController.getAllPlans)
 
 
-//**************** AI 
-router.post("/getDimensions", authentication,aiController.getDimensions)
+
 
 module.exports = router
