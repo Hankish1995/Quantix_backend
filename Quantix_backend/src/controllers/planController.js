@@ -77,40 +77,40 @@ exports.addPlans = async (req, res) => {
         })
             .on('textCreated', (text) => {
                 process.stdout.write('\nassistant > ');
-                res.write(`data: ${text}\n\n`);
-                accumulatedData.push(text)
+                // res.write(`data: ${text}\n\n`);
+                // accumulatedData.push(text)
 
             })
             .on('textDelta', (textDelta, snapshot) => {
                 process.stdout.write(textDelta.value);
-                res.write(`data: ${textDelta.value}\n\n`);
+                res.write(textDelta.value);
                 accumulatedData.push(textDelta.value)
             })
-            .on('toolCallCreated', (toolCall) => {
-                process.stdout.write(`\nassistant > ${toolCall.type}\n\n`);
-                res.write(`data: ${toolCall.type}\n\n`);
-                accumulatedData.push(toolCall.type)
-            })
-            .on('toolCallDelta', (toolCallDelta, snapshot) => {
-                if (toolCallDelta.type === 'code_interpreter') {
-                    if (toolCallDelta.code_interpreter.input) {
-                        process.stdout.write(toolCallDelta.code_interpreter.input);
-                        res.write(`data: ${toolCallDelta.code_interpreter.input}\n\n`);
-                        accumulatedData.push(toolCallDelta.code_interpreter.input)
-                    }
-                    if (toolCallDelta.code_interpreter.outputs) {
-                        process.stdout.write("\noutput >\n");
-                        res.write("data: output\n\n");
-                        toolCallDelta.code_interpreter.outputs.forEach(output => {
-                            if (output.type === "logs") {
-                                process.stdout.write(`\n${output.logs}\n`);
-                                res.write(`data: ${output.logs}\n\n`);
-                                accumulatedData.push(output.logs)
-                            }
-                        });
-                    }
-                }
-            })
+            // .on('toolCallCreated', (toolCall) => {
+            //     process.stdout.write(`\nassistant > ${toolCall.type}\n\n`);
+            //     res.write(`data: ${toolCall.type}\n\n`);
+            //     accumulatedData.push(toolCall.type)
+            // })
+            // .on('toolCallDelta', (toolCallDelta, snapshot) => {
+            //     if (toolCallDelta.type === 'code_interpreter') {
+            //         if (toolCallDelta.code_interpreter.input) {
+            //             process.stdout.write(toolCallDelta.code_interpreter.input);
+            //             res.write(`data: ${toolCallDelta.code_interpreter.input}\n\n`);
+            //             accumulatedData.push(toolCallDelta.code_interpreter.input)
+            //         }
+            //         if (toolCallDelta.code_interpreter.outputs) {
+            //             process.stdout.write("\noutput >\n");
+            //             res.write("data: output\n\n");
+            //             toolCallDelta.code_interpreter.outputs.forEach(output => {
+            //                 if (output.type === "logs") {
+            //                     process.stdout.write(`\n${output.logs}\n`);
+            //                     res.write(`data: ${output.logs}\n\n`);
+            //                     accumulatedData.push(output.logs)
+            //                 }
+            //             });
+            //         }
+            //     }
+            // })
             .on('end', async() => {
                 let planObj = {
                     userId: userId,
