@@ -111,9 +111,6 @@ exports.addPlans = async (req, res) => {
 
 
 
-
-
-
 exports.deletePlan = async (req, res) => {
     try {
         let planId = req.query.planId;

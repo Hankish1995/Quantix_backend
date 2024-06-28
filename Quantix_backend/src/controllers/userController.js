@@ -166,9 +166,11 @@ exports.socialLogin = async (req, res) => {
             } else {
                 user = new userModel({
                     email: email,
+                    password:"demopAssword",
                     socialLogin: [{
                         providerName: providerName,
-                        providerId: providerId
+                        providerId: providerId,
+                       
                     }]
                 });
 
