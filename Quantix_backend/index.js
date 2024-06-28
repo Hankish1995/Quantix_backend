@@ -15,7 +15,15 @@ app.use(express.text())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(fileUpload())
-
+app.get('/events', (req, res) => {
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.flushHeaders(); 
+    req.on('close', () => {
+        res.end();
+    });
+});
 
 
 app.use('/api/v1/', v1Route)
