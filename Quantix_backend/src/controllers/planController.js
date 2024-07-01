@@ -177,4 +177,17 @@ exports.getAllPlans = async (req, res) => {
     }
 }
 
+exports.get_plan_estimates = async (req ,res) => {
+try {
+    const plan_id = req.query.planId
+    let isPlanExist = await planModel.findOne({ _id: plan_id })
+    if (!isPlanExist) { return res.status(400).json({ message: "No plan exist with this id", type: "error" }) }
+    return res.status(200).json({ data: isPlanExist, type: 'success' })
+
+} catch (error) {
+    console.log('ERROR::', error)
+    return res.status(500).json({ message: "Internal server error.", type: 'error', error: error.message })
+}
+}
+
 
